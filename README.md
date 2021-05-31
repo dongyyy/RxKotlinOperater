@@ -1,2 +1,2 @@
 # RxKotlinOperator
-RxKotlin Operaters Example
+RxKotlin Operators Example
