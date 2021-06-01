@@ -69,55 +69,6 @@
                 android:text="Clear" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="BehaviorSubject"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/behaviorSubjectTextView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="BehaviorRelay"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/behaviorRelayTextView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="20sp" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -154,13 +105,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/observableIntervalTriggerButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="interval" />
-
-            <Button
                 android:id="@+id/observableFromTriggerButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -173,6 +117,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Start" />
+
+
+            <Button
+                android:id="@+id/observableIntervalTriggerButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="interval" />
         </LinearLayout>
 
         <LinearLayout

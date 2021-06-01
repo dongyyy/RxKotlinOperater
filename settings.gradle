@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "rxjava_operator"
+rootProject.name = "rxkotlin_operator"

@@ -24,6 +24,9 @@ class MainViewModel : ViewModel() {
 
         if (result > 50) {
             countBehaviorRelay.onErrorComplete()
+            //Relay 는 onComplete 이후 onNext 써도 애러가 안남
+            //Observer 의 onComplete 콜백도 호출 안함
+            //UI와 연관되서 많이 사용
         }
     }
 }

@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.bleo.rxjava_operator", appContext.packageName)
+        assertEquals("com.dongy.rxkotlin_operator", appContext.packageName)
     }
 }

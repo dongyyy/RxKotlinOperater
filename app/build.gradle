@@ -6,7 +6,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.bleo.rxjava_operator"
+        applicationId "com.dongy.rxkotlin_operator"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1

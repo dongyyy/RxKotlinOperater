@@ -25,10 +25,8 @@ class MainFragment : Fragment() {
         private const val TAG: String = "dongy"
     }
 
-    // MARK: - Rx
-    private var disposeBag = CompositeDisposable()
+    private var disposeBag = CompositeDisposable() //CompositeDisposable.add(Disposable)
 
-    // MARK: - Properties
     private lateinit var viewModel: MainViewModel
 
     private lateinit var resultObservable: Observable<String>
@@ -42,9 +40,9 @@ class MainFragment : Fragment() {
         get() = countEditText.text.toString()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.main_fragment, container, false).apply {
             setupObservable()
@@ -67,201 +65,193 @@ class MainFragment : Fragment() {
         resultObservable = Observable.create<String> { observableEmitter ->
             mObservableEmitter = observableEmitter
         }
-        //TODO 위 emitter 연결은 아래 코드와 같다
+        //위 emitter 연결은 아래 코드와 같다
 //        resultObservable = Observable.create<String> (object : ObservableOnSubscribe<String>{
 //            override fun subscribe(emitter: ObservableEmitter<String>) {
 //                mObservableEmitter = emitter
 //            }
 //        })
 
+        //Observable 에 publish 연산자를 붙여 만든다.
+        //subscribe 호출로 배출을 시작하지만 connect 메서드를 호출한 후에 활성화 된다.
+        //Publish Subject 과 사용방법은 다르지만 같은 동작을 한다.
         connectableObservable = Observable
-            .interval(100, TimeUnit.MILLISECONDS)
-            .publish()
+                .interval(100, TimeUnit.MILLISECONDS)
+                .publish()
     }
 
 
     private fun bind() {
 
         resultObservable
-            .doOnNext {
-                Log.d(TAG, "Emit: $it")
-            }
-            .subscribe {
-                observableResultTextView.text = it
-            }
-            .disposed(by = disposeBag)
+                .doOnNext {
+                    Log.d(TAG, "Emit: $it")
+                }
+                .subscribe {
+                    observableResultTextView.text = it
+                }
+                .disposed(by = disposeBag)
 
         viewModel.countBehaviorSubject
-            .subscribe {
-                behaviorSubjectTextView.text = it
-            }
-            .disposed(by = disposeBag)
+                .subscribe {
+                    mObservableEmitter.onNext(it)
+                }
+                .disposed(by = disposeBag)
 
         viewModel.countBehaviorRelay
-            .subscribe {
-                behaviorRelayTextView.text = it
-            }
-            .disposed(by = disposeBag)
+                .subscribe {
+                    mObservableEmitter.onNext(it)
+                }
+                .disposed(by = disposeBag)
 
         observableJustTriggerButton
-            .clicks()
-            .subscribe {
-                observableJust()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    observableJust()
+                }
+                .disposed(by = disposeBag)
 
         observableRangeTriggerButton
-            .clicks()
-            .subscribe {
-                observableRange()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    observableRange()
+                }
+                .disposed(by = disposeBag)
 
         observableRepeatTriggerButton
-            .clicks()
-            .subscribe {
-                observableRepeat()
-            }
-            .disposed(by = disposeBag)
-
-        observableIntervalTriggerButton
-            .clicks()
-            .subscribe {
-                observableInterval()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    observableRepeat()
+                }
+                .disposed(by = disposeBag)
 
         observableFromTriggerButton
-            .clicks()
-            .subscribe {
-                observableFrom()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    observableFrom()
+                }
+                .disposed(by = disposeBag)
 
         observableStartTriggerButton
-            .clicks()
-            .subscribe {
-                observableStart()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    observableStart()
+                }
+                .disposed(by = disposeBag)
+
+        observableIntervalTriggerButton
+                .clicks()
+                .subscribe {
+                    observableInterval()
+                }
+                .disposed(by = disposeBag)
 
         observableSubscribeTriggerButton
-            .clicks()
-            .subscribe {
-                subscribeConnectableObservable()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    subscribeConnectableObservable()
+                }
+                .disposed(by = disposeBag)
 
         observableConnectTriggerButton
-            .clicks()
-            .subscribe {
-                observableConnect()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    observableConnect()
+                }
+                .disposed(by = disposeBag)
 
         observableDisconnectTriggerButton
-            .clicks()
-            .subscribe {
-                observableDisconnect()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    observableDisconnect()
+                }
+                .disposed(by = disposeBag)
 
         singleCreateTriggerButton
-            .clicks()
-            .subscribe {
-                singleCreate()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    singleCreate()
+                }
+                .disposed(by = disposeBag)
 
         behaviorSubjectTriggerButton
-            .clicks()
-            .subscribe {
-                viewModel.tapBehaviorSubjectButton()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    viewModel.tapBehaviorSubjectButton()
+                }
+                .disposed(by = disposeBag)
 
         behaviorRelayTriggerButton
-            .clicks()
-            .subscribe {
-                viewModel.tapBehaviorRelayButton()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    viewModel.tapBehaviorRelayButton()
+                }
+                .disposed(by = disposeBag)
 
         clearButton
-            .clicks()
-            .subscribe {
-                countEditText.setText("0")
-                mObservableEmitter.onNext("")
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .subscribe {
+                    mObservableEmitter.onNext("")
+                }
+                .disposed(by = disposeBag)
 
         disposeTriggerButton
-            .clicks()
-            .throttleFirst(1000, TimeUnit.MILLISECONDS)
-            .subscribe {
-                disposeResultTextView.text = "Disposed"
-                disposeBag.dispose()
-            }
-            .disposed(by = disposeBag)
+                .clicks()
+                .throttleFirst(1000, TimeUnit.MILLISECONDS) // 1초에 한번 첫번째 클릭만 통과
+                .subscribe {
+                    Log.d(TAG, "Disposed onNext: $it")
+                    disposeResultTextView.text = "Disposed"
+                    disposeBag.dispose()
+                }
+                .disposed(by = disposeBag)
 
     }
 
     private fun observableJust() {
         Observable
-            .just(countValue)
-            .subscribe {
-                mObservableEmitter.onNext(it)
-            }
-            .disposed(disposeBag)
+                .just(countValue)
+                .subscribe {
+                    mObservableEmitter.onNext(it)
+                }
+                .disposed(disposeBag)
 
     }
 
     private fun observableRange() {
         Observable
-            .range(0, countValue.toInt())
-            .map { it * 10 }
-            .subscribe {
-                val result = "${observableResultTextView.text} $it"
-                mObservableEmitter.onNext(result)
-            }
-            .disposed(disposeBag)
+                .range(0, countValue.toInt())
+                .subscribe {
+                    val result = "${observableResultTextView.text} $it"
+                    mObservableEmitter.onNext(result)
+                }
+                .disposed(disposeBag)
     }
 
     private fun observableRepeat() {
         Observable
-            .just(countValue)
-            .repeat()
-            .take(10)
-            .subscribe {
-                Log.d(TAG, "observableRepeat: $it")
-                val result = "${observableResultTextView.text} $it"
-                mObservableEmitter.onNext(result)
-            }
-            .disposed(by = disposeBag)
-    }
-
-    private fun observableInterval() {
-        Observable
-            .interval(1000, TimeUnit.MILLISECONDS)
-            .subscribe {
-                Log.d(TAG, "observableInterval: $it")
-                mObservableEmitter.onNext(it.toString())
-            }
-            .disposed(by = disposeBag)
+                .just(countValue)
+                .repeat()
+                .take(10) //take 없으면 영원히 반복함
+                .subscribe {
+                    Log.d(TAG, "observableRepeat: $it")
+                    val result = "${observableResultTextView.text} $it"
+                    mObservableEmitter.onNext(result)
+                }
+                .disposed(by = disposeBag)
     }
 
     private fun observableFrom() {
         // fromArray
         val arr = Array(10) { i -> i * countValue.toInt() }
-        Observable.fromArray(arr)
-            .subscribe {
-                Log.d(TAG, "observableFrom: size - ${it.size}")
-                for (item in it) {
-                    val result = "${observableResultTextView.text} $item"
-                    mObservableEmitter.onNext(result)
+        Observable.fromArray(arr) //fromIterable 도 있다.
+                .subscribe {
+                    Log.d(TAG, "observableFrom: size - ${it.size}")
+                    for (item in it) {
+                        val result = "${observableResultTextView.text} $item"
+                        mObservableEmitter.onNext(result)
+                    }
                 }
-            }
-            .disposed(by = disposeBag)
+                .disposed(by = disposeBag)
     }
 
     private fun observableStart() {
@@ -272,24 +262,35 @@ class MainFragment : Fragment() {
         }
 
         Observable.fromCallable(callable)
-            .subscribe {
-                Log.d(TAG, "observableFrom: $it")
-                mObservableEmitter.onNext(it)
-            }
-            .disposed(by = disposeBag)
+                .subscribe {
+                    Log.d(TAG, "observableFrom: $it")
+                    mObservableEmitter.onNext(it)
+                }
+                .disposed(by = disposeBag)
+    }
+
+    private fun observableInterval() {
+        Observable
+                .interval(1000, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    Log.d(TAG, "observableInterval: $it")
+                    mObservableEmitter.onNext(it.toString())
+                }
+                .disposed(by = disposeBag)
     }
 
     private fun subscribeConnectableObservable() {
         connectableObservable
-            .subscribe {
-                Log.d(TAG, "connectable Observable result $it")
-                mObservableEmitter.onNext(it.toString())
-            }
-            .disposed(by = disposeBag)
+                .subscribe {
+                    Log.d(TAG, "connectable Observable result $it")
+                    /**/observableResultTextView.text = "" //clear
+                    mObservableEmitter.onNext(it.toString())
+                }
+                .disposed(by = disposeBag)
     }
 
     private fun observableConnect() {
-        connectedObservable = connectableObservable.connect()
+        connectedObservable = connectableObservable.connect() //subscribe 보다 connect 먼저 누르면 데이터가 먼저 흐르고 있음...
     }
 
     private fun observableDisconnect() {
@@ -307,21 +308,21 @@ class MainFragment : Fragment() {
             // API 콜을 통해서 repsonse값을 받아온다던가..!?
             when (countValue.toInt()) {
                 200 -> {
-                    it.onSuccess("Matched!")// case 1: disposed
+                    it.onSuccess("dongy:: Matched!")// case 1: disposed
                 }
                 400 -> {
-                    it.onError(Throwable("Code: 400"))
+                    it.onError(Throwable("dongy:: Code: 400"))
                 }
                 else -> {
-                    throw RuntimeException("Unknown response") // case 2: throw
+                    throw RuntimeException("dongy:: Unknown response") // case 2: throw
                 }
             }
         }.subscribe({
             // Success
-            Log.d(TAG, "singleCreate: Success - $it")
+            Log.d(TAG, "dongy:: singleCreate: Success - $it")
         }, {
             // Error
-            Log.d(TAG, "singleCreate: Error!! $it")
+            Log.d(TAG, "dongy:: sin gleCreate: Error!! $it")
         })
     }
 
