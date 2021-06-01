@@ -190,6 +190,7 @@ class MainFragment : Fragment() {
         clearButton
             .clicks()
             .subscribe {
+                countEditText.setText("0")
                 mObservableEmitter.onNext("")
             }
             .disposed(by = disposeBag)
@@ -229,7 +230,7 @@ class MainFragment : Fragment() {
     private fun observableRepeat() {
         Observable
             .just(countValue)
-            .repeat(3)
+            .repeat()
             .take(10)
             .subscribe {
                 Log.d(TAG, "observableRepeat: $it")
@@ -250,7 +251,6 @@ class MainFragment : Fragment() {
     }
 
     private fun observableFrom() {
-
         // fromArray
         val arr = Array(10) { i -> i * countValue.toInt() }
         Observable.fromArray(arr)
@@ -262,11 +262,9 @@ class MainFragment : Fragment() {
                 }
             }
             .disposed(by = disposeBag)
-
     }
 
     private fun observableStart() {
-
         // from Callable
         val callable = Callable<String> {
             Thread.sleep(3000)
@@ -295,7 +293,7 @@ class MainFragment : Fragment() {
     }
 
     private fun observableDisconnect() {
-        if (::connectedObservable.isInitialized == false) {
+        if (!::connectedObservable.isInitialized) {
             Log.d(TAG, "observableConnect: not initialized")
             return
         }

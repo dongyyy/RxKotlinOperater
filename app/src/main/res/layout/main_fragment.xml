@@ -10,16 +10,32 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/observableResultTextView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_weight="9"
-            android:gravity="center"
-            android:text="None"
-            android:textSize="40sp" />
+            android:layout_weight="5"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Input" />
+
+
+            <TextView
+                android:id="@+id/observableResultTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="None"
+                android:textSize="40sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,7 +64,7 @@
             <Button
                 android:id="@+id/clearButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Clear" />
         </LinearLayout>
@@ -119,14 +135,14 @@
             <Button
                 android:id="@+id/observableRangeTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="range" />
 
             <Button
                 android:id="@+id/observableRepeatTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="repeat" />
         </LinearLayout>
@@ -140,21 +156,21 @@
             <Button
                 android:id="@+id/observableIntervalTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="interval" />
 
             <Button
                 android:id="@+id/observableFromTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="from" />
 
             <Button
                 android:id="@+id/observableStartTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Start" />
         </LinearLayout>
@@ -168,21 +184,21 @@
             <Button
                 android:id="@+id/observableSubscribeTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Subscribe" />
 
             <Button
                 android:id="@+id/observableConnectTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Connect" />
 
             <Button
                 android:id="@+id/observableDisconnectTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Disconnect" />
 
@@ -197,14 +213,14 @@
             <Button
                 android:id="@+id/singleCreateTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Single_Create" />
 
             <Button
                 android:id="@+id/behaviorSubjectTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Behaior Subject"
                 android:textSize="12sp" />
@@ -212,7 +228,7 @@
             <Button
                 android:id="@+id/behaviorRelayTriggerButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Behavior Relay"
                 android:textSize="12sp" />
